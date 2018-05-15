@@ -121,25 +121,19 @@ string fileNameInput() {
 }
 
 void getEdges(ifstream &myfile,string fname) {
-	myfile.open(fname, ios::in);
+	//myfile.open(fname, ios::in);
 	char my_character;
 	int number_of_lines = 0;
 	vector<int> myEdge;
 
+
 	while (!myfile.eof()) {
 
-		myfile.get(my_character);
+		myfile >> my_character;
+
+		//myfile.get(my_character);
 		cout << my_character;
-		myfile.get(my_character);
-		cout << my_character;
-		myfile.get(my_character);
-		cout << my_character;
-		myfile.get(my_character);
-		cout << my_character;
-		myfile.get(my_character);
-		cout << my_character;
-		myfile.get(my_character);
-		cout << my_character;
+	
 		//if (my_character == '\n') {
 		//	++number_of_lines;
 		//}
