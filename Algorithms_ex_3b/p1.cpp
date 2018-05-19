@@ -14,8 +14,12 @@ typedef struct Vertex {
 
 	int currentVertex;
 	vector<int> myEdges;
+	int count;
+	bool visited;
 
 } Vertex;
+
+
 
 
 
@@ -28,6 +32,8 @@ class Graph
 			  // Pointer to an array containing adjacency
 			  // lists
 	list<int> *adj;
+
+
 public:
 	Graph(int V);  // Constructor
 
@@ -67,10 +73,14 @@ void Graph::BFS(int s)
 	// Mark all the vertices as not visited
 	bool *visited = new bool[V];
 	for (int i = 0; i < V; i++)
-		visited[i] = false;
+		visited[i] = false; // make white
 
 	// Create a queue for BFS
 	list<int> queue;
+	list<Vertex> black;  ///
+	Vertex *visitedVertex = new Vertex[s]; ///
+	Vertex node; ///
+
 
 	// Mark the current node as visited and enqueue it
 	visited[s] = true;
@@ -79,32 +89,40 @@ void Graph::BFS(int s)
 	// 'i' will be used to get all adjacent
 	// vertices of a vertex
 	list<int>::iterator i;
+	list<int>::iterator k;  ///
+	int p=0;
 
 	while (!queue.empty())
 	{
 		// Dequeue a vertex from queue and print it
 		s = queue.front();
+		node.count = 1; ///
+		black.push_back(node); ///
 		cout << s << " ";
 		queue.pop_front();
+		visitedVertex[p].currentVertex = s; ///
+		visitedVertex[p].count = 1; ///
+
+
+		/*for (k = adj[s].begin(); k != adj[s].end(); ++k) {
+			if (visited[*k] == true) {
+				visitedVertex[p].count++;
+			}
+		}*/
 
 		// Get all adjacent vertices of the dequeued
 		// vertex s. If a adjacent has not been visited, 
 		// then mark it visited and enqueue it
 		for (i = adj[s].begin(); i != adj[s].end(); ++i)
 		{
-			if (!visited[*i])
+			if (!visited[*i])  // if white
 			{
-				visited[*i] = true;
+				visited[*i] = true;  // make grey
 				queue.push_back(*i);
 			}
 		}
 	}
 }
-
-
-
-
-
 
 
 
